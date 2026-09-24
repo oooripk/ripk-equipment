@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>РИПК — промышленное оборудование</title>
+  <meta name="description" content="Гидравлическое и грузоподъёмное оборудование ООО «Ростовская Инженеро-Промышленная Компания».">
+  <style>
+    :root{--navy:#07345d;--navy2:#0b477b;--orange:#ff5a16;--ink:#102a43;--muted:#65758b;--bg:#f4f7fa;--white:#fff;--line:#dce5ee}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:#fff}
+    a{text-decoration:none;color:inherit}.container{max-width:1240px;margin:auto;padding:0 24px}
+    header{position:sticky;top:0;z-index:20;background:rgba(7,52,93,.98);color:#fff;box-shadow:0 2px 14px rgba(0,0,0,.12)}
+    .nav{min-height:76px;display:flex;align-items:center;gap:28px}.brand{font-weight:800;line-height:1.05;font-size:20px;max-width:330px}.brand small{display:block;font-size:11px;letter-spacing:.08em;opacity:.8;margin-top:5px}
+    nav{display:flex;gap:22px;margin-left:auto;font-size:14px}nav a{opacity:.95}nav a:hover{color:#ffd1bd}
+    .search{width:210px;background:#fff;color:#78879a;border-radius:9px;padding:11px 13px;font-size:13px}.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:8px;padding:14px 22px;font-weight:800;cursor:pointer}.btn-orange{background:var(--orange);color:#fff}.btn-light{background:#fff;color:var(--navy);border:1px solid #cbd7e3}
+    .hero{background:linear-gradient(90deg,#fff 0%,#fff 44%,rgba(255,255,255,.6) 65%,rgba(255,255,255,0) 100%),url("assets/hero-ripk.png") center/cover no-repeat;min-height:610px;display:flex;align-items:center}
+    .hero-copy{max-width:610px;padding:80px 0}.eyebrow{color:var(--orange);font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.hero h1{font-size:58px;line-height:.98;margin:14px 0 18px;color:var(--navy)}.hero h1 span{display:block}.hero p{font-size:19px;line-height:1.5;color:#536273;max-width:570px}.actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}
+    section{padding:74px 0}.section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:30px}.section-head h2{font-size:34px;margin:0;color:var(--navy)}.section-head p{color:var(--muted);max-width:590px;margin:0;line-height:1.5}
+    .categories{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}.card{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:.2s;box-shadow:0 5px 18px rgba(17,44,71,.05)}.card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(17,44,71,.1)}.card .pic{height:145px;background:linear-gradient(145deg,#f7fafc,#e9eef4);display:flex;align-items:center;justify-content:center}.card .pic svg{width:130px;height:100px}.card h3{font-size:18px;margin:16px 16px 5px}.card .more{display:block;padding:0 16px 18px;color:var(--orange);font-weight:800}
+    .directions{background:var(--bg)}.direction-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}.direction{min-height:290px;border-radius:18px;padding:34px;color:#fff;position:relative;overflow:hidden;background:linear-gradient(135deg,var(--navy),#12689f)}.direction:nth-child(2){background:linear-gradient(135deg,#172d40,#31546c)}.direction h3{font-size:30px;margin:0 0 12px}.direction p{max-width:520px;color:#dbe9f5;line-height:1.55}.tags{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0}.tag{padding:8px 11px;border:1px solid rgba(255,255,255,.28);border-radius:20px;font-size:13px}
+    .catalog{display:grid;grid-template-columns:1fr 1fr;gap:55px;align-items:center}.catalog-visual{min-height:350px;background:#edf3f7;border-radius:18px;display:flex;align-items:center;justify-content:center;overflow:hidden}.catalog-visual img{width:92%;max-height:380px;object-fit:cover;object-position:top}.catalog h2{font-size:38px;color:var(--navy);margin:0 0 14px}.catalog p{color:var(--muted);line-height:1.6}
+    .features{border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr)}.feature{padding:30px 24px;border-right:1px solid var(--line)}.feature:last-child{border-right:0}.feature b{display:block;font-size:17px;margin-bottom:8px}.feature span{color:var(--muted);line-height:1.45;font-size:14px}
+    .cta{background:var(--navy);color:#fff;border-radius:20px;padding:46px;display:flex;justify-content:space-between;align-items:center;gap:25px}.cta h2{font-size:32px;margin:0 0 8px}.cta p{margin:0;color:#d7e6f2}
+    footer{margin-top:74px;background:#092a49;color:#c9d8e5;padding:38px 0}.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:35px}.footer-title{color:#fff;font-weight:800;margin-bottom:12px}.footer-note{font-size:13px;line-height:1.55}
+    @media(max-width:1000px){nav{display:none}.search{display:none}.categories{grid-template-columns:repeat(3,1fr)}.features{grid-template-columns:repeat(2,1fr)}.feature:nth-child(2){border-right:0}.direction-grid,.catalog{grid-template-columns:1fr}.hero{background-position:center}.hero h1{font-size:48px}}
+    @media(max-width:620px){.container{padding:0 16px}.nav{min-height:68px}.brand{font-size:16px}.hero{min-height:650px;background:linear-gradient(180deg,#fff 0%,rgba(255,255,255,.95) 50%,rgba(255,255,255,.2) 100%),url("assets/hero-ripk.png") center/cover}.hero-copy{padding:65px 0}.hero h1{font-size:39px}.hero p{font-size:16px}.categories{grid-template-columns:1fr 1fr}.features{grid-template-columns:1fr}.feature{border-right:0;border-bottom:1px solid var(--line)}.cta{padding:30px;display:block}.cta .btn{margin-top:20px}.footer-grid{grid-template-columns:1fr}section{padding:55px 0}}
+  </style>
+</head>
+<body>
+<header><div class="container nav">
+  <a class="brand" href="#">ООО «Ростовская<br>Инженеро-Промышленная Компания»<small>РИПК • ПРОМЫШЛЕННОЕ ОБОРУДОВАНИЕ</small></a>
+  <nav><a href="#catalog">Каталог</a><a href="#directions">Направления</a><a href="#about">О компании</a><a href="#contacts">Контакты</a></nav>
+  <div class="search">⌕ &nbsp; Поиск по продукции</div><a class="btn btn-orange" href="#contacts">Оставить заявку</a>
+</div></header>
+
+<main>
+<section class="hero"><div class="container"><div class="hero-copy">
+  <div class="eyebrow">Профессиональное оборудование</div>
+  <h1>Промышленное<br><span>оборудование</span></h1>
+  <p>Гидравлическое и грузоподъёмное оборудование для промышленных предприятий. Подбор, комплектация и решения по техническому заданию.</p>
+  <div class="actions"><a class="btn btn-orange" href="#catalog">Перейти в каталог →</a><a class="btn btn-light" href="#catalog">Смотреть каталог 2026</a></div>
+</div></div></section>
+
+<section><div class="container">
+  <div class="section-head"><div><div class="eyebrow">Каталог</div><h2>Основные категории</h2></div><p>Выберите направление оборудования и перейдите к нужной группе продукции.</p></div>
+  <div class="categories">
+    <a class="card" href="#directions"><div class="pic"><svg viewBox="0 0 140 100"><path d="M18 64C38 28 70 22 120 48" fill="none" stroke="#202a35" stroke-width="10"/><path d="M16 64l15 10M120 48l12 9" stroke="#e83f2b" stroke-width="10"/></svg></div><h3>Стропы</h3><span class="more">Смотреть →</span></a>
+    <a class="card" href="#directions"><div class="pic"><svg viewBox="0 0 140 100"><g fill="none" stroke="#202a35" stroke-width="9"><circle cx="50" cy="50" r="17"/><circle cx="82" cy="50" r="17"/></g><path d="M18 50h12M102 50h20" stroke="#e83f2b" stroke-width="9"/></svg></div><h3>Цепи</h3><span class="more">Смотреть →</span></a>
+    <a class="card" href="#directions"><div class="pic"><svg viewBox="0 0 140 100"><path d="M30 66h80l-13-34H43z" fill="#f0b400"/><path d="M70 32V18" stroke="#e83f2b" stroke-width="8"/><circle cx="70" cy="17" r="6" fill="#e83f2b"/><path d="M42 66v14M98 66v14" stroke="#e83f2b" stroke-width="6"/></svg></div><h3>Траверсы</h3><span class="more">Смотреть →</span></a>
+    <a class="card" href="#directions"><div class="pic"><svg viewBox="0 0 140 100"><path d="M35 25h60v45H35z" fill="#e9b21c"/><path d="M45 70l-10 18M85 70l10 18" stroke="#273746" stroke-width="7"/><path d="M95 42l24 10-24 10z" fill="#273746"/></svg></div><h3>Захваты</h3><span class="more">Смотреть →</span></a>
+    <a class="card" href="#directions"><div class="pic"><svg viewBox="0 0 140 100"><circle cx="52" cy="52" r="23" fill="none" stroke="#596a78" stroke-width="10"/><path d="M78 52h42" stroke="#d33c2e" stroke-width="10"/><circle cx="115" cy="52" r="8" fill="none" stroke="#d33c2e" stroke-width="6"/></svg></div><h3>Такелаж</h3><span class="more">Смотреть →</span></a>
+  </div>
+</div></section>
+
+<section id="directions" class="directions"><div class="container">
+  <div class="section-head"><div><div class="eyebrow">Направления</div><h2>Оборудование для задач</h2></div><p>Два ключевых каталога компании собраны в единой структуре сайта.</p></div>
+  <div class="direction-grid">
+    <article class="direction"><h3>Гидравлическое оборудование</h3><p>Домкраты, гидравлические цилиндры, съёмники, прессы, насосы, станции и специализированный инструмент.</p><div class="tags"><span class="tag">Домкраты</span><span class="tag">Цилиндры</span><span class="tag">Съёмники</span><span class="tag">Прессы</span><span class="tag">Насосы</span></div><a class="btn btn-orange" href="#contacts">Подобрать оборудование</a></article>
+    <article class="direction"><h3>Грузоподъёмное оборудование</h3><p>Стропы, цепи, траверсы, захваты и такелажная оснастка. Каталог содержит технические характеристики и схемы изделий.</p><div class="tags"><span class="tag">Стропы</span><span class="tag">Цепи</span><span class="tag">Траверсы</span><span class="tag">Захваты</span><span class="tag">Такелаж</span></div><a class="btn btn-orange" href="#contacts">Подобрать оборудование</a></article>
+  </div>
+</div></section>
+
+<section id="catalog"><div class="container catalog">
+  <div class="catalog-visual"><img src="assets/hero-ripk.png" alt="Каталог грузоподъёмного оборудования РИПК"></div>
+  <div><div class="eyebrow">Каталог продукции • 2026</div><h2>Технические характеристики — в одном месте</h2><p>Сайт станет удобной электронной версией каталогов: категории, модели, характеристики, чертежи и возможность быстро отправить запрос на цену.</p><div class="actions"><a class="btn btn-orange" href="#contacts">Запросить цену</a></div></div>
+</div></section>
+
+<section id="about"><div class="container"><div class="features">
+  <div class="feature"><b>⚙ Собственное производство</b><span>Контроль качества на этапах изготовления и комплектации.</span></div>
+  <div class="feature"><b>✓ Технические стандарты</b><span>Работа с технической документацией и характеристиками изделий.</span></div>
+  <div class="feature"><b>🚚 Поставка</b><span>Организация поставки оборудования и комплектующих.</span></div>
+  <div class="feature"><b>▣ Индивидуальные решения</b><span>Изготовление и подбор оборудования по техническому заданию.</span></div>
+</div></div></section>
+
+<section id="contacts"><div class="container"><div class="cta"><div><h2>Нужно подобрать оборудование?</h2><p>Оставьте заявку — обсудим задачу и состав комплектации.</p></div><a class="btn btn-orange" href="mailto:info@oooripk.ru?subject=Запрос%20по%20оборудованию">Оставить заявку</a></div></div></section>
+</main>
+
+<footer><div class="container footer-grid"><div><div class="footer-title">ООО «Ростовская Инженеро-Промышленная Компания»</div><div class="footer-note">Гидравлическое и грузоподъёмное оборудование. Каталог продукции 2026.</div></div><div><div class="footer-title">Разделы</div><div class="footer-note">Каталог<br>Направления<br>О компании<br>Контакты</div></div><div><div class="footer-title">Связаться</div><div class="footer-note">Оставить заявку<br>info@oooripk.ru</div></div></div></footer>
+</body></html>
