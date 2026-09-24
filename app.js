@@ -78,19 +78,41 @@ const TECH_NOTES={
 function techHtml(name){const t=TECH[name], note=TECH_NOTES[name];let out='';if(t){out+='<div class="tech-title">Технические характеристики</div><div class="table-wrap"><table class="data-table"><thead><tr>'+t.cols.map(c=>'<th>'+c+'</th>').join('')+'</tr></thead><tbody>'+t.rows.map(r=>'<tr>'+r.map(x=>'<td>'+x+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>';if(t.note)out+='<div class="tech-note">'+t.note+'</div>';out+='<div class="tech-source">Данные перенесены с соответствующей страницы каталога РИПК 2026. Для параметров, которых нет в этой таблице, используйте исходную техническую страницу.</div>';}else if(note){out+='<div class="tech-title">Сведения из технической страницы</div><div class="tech-note">'+note+'</div><div class="tech-source">Текстовая выжимка сделана по исходной странице каталога. Числовые таблицы не воспроизводятся там, где скан не позволяет надёжно прочитать все значения.</div>';}else{out+='<div class="tech-source">Для этой позиции отдельная таблица характеристик в текстовом виде не перенесена. Откройте исходную техническую страницу каталога — она показана рядом.</div>';}return out;}
 function renderCats(){document.getElementById('catgrid').innerHTML=cats.map(c=>`<article class="cat" onclick="chooseCat('${c[0]}')"><span class="cat-count">${products.filter(p=>p.cat===c[0]).length} поз.</span><img src="assets/page-${String(c[3]).padStart(2,'0')}.jpg"><h3>${c[0]}</h3><p>${c[1]}</p><span>${c[2]} • открыть изделия →</span></article>`).join('');document.getElementById('catSelect').innerHTML='<option value="Все">Все категории</option>'+cats.map(c=>`<option>${c[0]}</option>`).join('')}
 function chooseCat(c){document.getElementById('catSelect').value=c;document.getElementById('products').scrollIntoView({behavior:'smooth'});renderProducts()}
-function renderProducts(){const q=document.getElementById('q').value.trim().toLowerCase();const c=document.getElementById('catSelect').value;const list=products.filter(p=>(c==='Все'||p.cat===c)&&(!q||p.name.toLowerCase().includes(q)));document.getElementById('count').textContent=`Показано ${list.length} изделий из ${products.length}`;document.getElementById('productsGrid').innerHTML=list.map(p=>`<article class="product" onclick="openPage(${p.page},'${p.name.replace(/'/g,"\\'")}','${p.cat}')"><img src="assets/page-${String(p.page).padStart(2,'0')}.jpg"><div class="pb"><div class="tag">${p.cat}</div><h3>${p.name}</h3><p>Источник: каталог РИПК 2026 • стр. ${p.page}</p><div class="open">Открыть карточку изделия →</div></div></article>`).join('')||'<p style="color:#6e7f8e">Ничего не найдено. Попробуйте другое название или категорию.</p>'}
-function openPage(n,name,cat){
-document.getElementById('big').src='assets/page-'+String(n).padStart(2,'0')+'.jpg';
-document.getElementById('mt').textContent=name;
-document.getElementById('mdcat').textContent=cat;
-document.getElementById('mpage').textContent='№ '+n;
-document.getElementById('tname').textContent=name;
-document.getElementById('tcat').textContent=cat;
-document.getElementById('tpage').textContent='№ '+n+' каталога 2026'; document.getElementById('techPanel').innerHTML=techHtml(name);
-document.getElementById('requestBtn').href='mailto:oooripk@yandex.ru?subject='+encodeURIComponent('Запрос цены: '+name);
-document.getElementById('pdfBtn').href='catalog-2026.pdf#page='+n;
-document.getElementById('modal').classList.add('show');
-document.body.style.overflow='hidden'
+function renderProducts(){
+ const q=document.getElementById('q').value.trim().toLowerCase();
+ const c=document.getElementById('catSelect').value;
+ const list=products.filter((p,i)=>{const hay=(p.name+' '+p.cat+' '+p.page+' РИПК-'+String(i+1).padStart(3,'0')).toLowerCase();return(c==='Все'||p.cat===c)&&(!q||hay.includes(q))});
+ document.getElementById('count').textContent=`Показано ${list.length} изделий из ${products.length}`;
+ document.querySelectorAll('.chip').forEach(x=>x.classList.toggle('active',x.dataset.cat===c));
+ document.getElementById('productsGrid').innerHTML=list.map((p)=>{
+   const idx=products.indexOf(p)+1;
+   const code='РИПК-'+String(idx).padStart(3,'0');
+   const tech=!!TECH[p.name];
+   const safeName=p.name.replace(/'/g,"\\'");
+   return `<article class="product" onclick="openPage(${p.page},'${safeName}','${p.cat}','${code}')"><div class="visual"><img src="assets/page-${String(p.page).padStart(2,'0')}.jpg" alt="${p.name}"><span class="page-badge">стр. ${p.page}</span>${tech?'<span class="tech-dot">✓ характеристики</span>':''}</div><div class="pb"><div class="tag">${p.cat}</div><h3>${p.name}</h3><p>Каталог РИПК 2026</p><div class="code">Артикул: ${code}</div><div class="quick"><span>Техническая страница</span><span>${tech?'Таблица есть':'См. PDF'}</span></div><div class="open">Открыть карточку →</div></div></article>`;
+ }).join('')||'<div class="empty-state">Ничего не найдено. Попробуйте другое название, категорию или номер страницы.</div>'
+}
+let currentCode='';
+function openPage(n,name,cat,code){
+ currentCode=code;
+ document.getElementById('big').src='assets/page-'+String(n).padStart(2,'0')+'.jpg';
+ document.getElementById('big').alt=name+' — техническая страница';
+ document.getElementById('mt').textContent=name;
+ document.getElementById('mdcat').textContent=cat;
+ document.getElementById('mpage').textContent='№ '+n;
+ document.getElementById('tcat').textContent=cat;
+ document.getElementById('tpage').textContent=code+' • стр. '+n;
+ document.getElementById('techPanel').innerHTML=techHtml(name);
+ document.getElementById('requestBtn').href='mailto:oooripk@yandex.ru?subject='+encodeURIComponent('Запрос коммерческого предложения: '+name+' ('+code+')')+'&body='+encodeURIComponent('Здравствуйте! Прошу предоставить коммерческое предложение на изделие '+name+' ('+code+'), страница '+n+' каталога РИПК 2026.\n\nКоличество: \nТребования/комментарии: ');
+ document.getElementById('pdfBtn').href='catalog-2026.pdf#page='+n;
+ document.getElementById('modal').classList.add('show');
+ document.body.style.overflow='hidden';
+}
+function copyCurrentCode(){
+ if(!currentCode)return;
+ const done=()=>{const b=document.getElementById('copyBtn');const old=b.textContent;b.textContent='Скопировано ✓';setTimeout(()=>b.textContent=old,1400)};
+ if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(currentCode).then(done).catch(()=>{});} 
 }
 function closeModal(){document.getElementById('modal').classList.remove('show');document.body.style.overflow=''}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 renderCats();renderProducts();
