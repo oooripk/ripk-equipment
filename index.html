@@ -31,7 +31,7 @@ section{padding:52px 0}.gray{background:var(--bg)}h2{font-size:31px;color:var(--
 .tech-table td:first-child{color:#6e7f8e;width:42%}
 .tech-table td:last-child{font-weight:700;color:#17324b}
 .tech-source{margin-top:13px;background:#f3f7fa;border-radius:9px;padding:11px;font-size:12px;color:#6e7f8e;line-height:1.45}
-</style></head><body>
+.table-wrap{overflow:auto;margin-top:10px}.data-table{width:100%;border-collapse:collapse;font-size:12px;min-width:460px}.data-table th{background:#073b6b;color:#fff;text-align:left;padding:9px 7px}.data-table td{border-bottom:1px solid #d9e3ea;padding:8px 7px;color:#17324b}.data-table tr:nth-child(even) td{background:#f6f9fb}</style></head><body>
 <header><div class="w nav"><a class="logo" href="#top">ООО «Ростовская<br>Инженеро-Промышленная Компания»<small>РИПК • ГРУЗОПОДЪЁМНОЕ ОБОРУДОВАНИЕ</small></a><nav><a href="#categories">Категории</a><a href="#products">Изделия</a><a href="catalog-2026.pdf" target="_blank">Каталог 2026</a><a href="#contacts">Контакты</a></nav><div class="search">⌕ &nbsp; Поиск по продукции</div><a class="btn orange" href="#contacts">Запросить цену</a></div></header>
 <main id="top"><section class="hero"><div class="w"><div><div class="eyebrow">Грузоподъёмное оборудование • каталог 2026</div><h1>Оборудование для профессиональных задач</h1><p class="lead">Электронный каталог РИПК: стропы, цепи, траверсы, захваты, такелаж и канаты. Выбирайте категорию или конкретное изделие и открывайте техническую страницу исходного каталога.</p><div class="actions"><a class="btn orange" href="#categories">Перейти в каталог →</a><a class="btn white" href="catalog-2026.pdf" target="_blank">Скачать каталог 2026</a></div></div></div></section>
 <section id="categories" class="gray"><div class="w"><div class="section-head"><div><div class="eyebrow">Каталог</div><h2>Категории оборудования</h2></div><p>Категории собраны по содержанию предоставленного каталога РИПК 2026. Нажмите на карточку, чтобы отфильтровать изделия.</p></div><div class="catgrid" id="catgrid"></div></div></section>
@@ -51,17 +51,7 @@ section{padding:52px 0}.gray{background:var(--bg)}h2{font-size:31px;color:var(--
 <div>Источник<b>Каталог РИПК 2026</b></div>
 <div>Страница<b id="mpage"></b></div>
 </div>
-<div class="tech-panel">
-<div class="tech-title">Технические характеристики</div>
-<table class="tech-table">
-<tr><td>Изделие</td><td id="tname"></td></tr>
-<tr><td>Категория</td><td id="tcat"></td></tr>
-<tr><td>Техническая страница</td><td id="tpage"></td></tr>
-<tr><td>Чертёж и размерные обозначения</td><td>См. исходную страницу каталога</td></tr>
-<tr><td>Таблица параметров</td><td>См. исходную таблицу на странице каталога</td></tr>
-</table>
-<div class="tech-source">Значения характеристик не переносятся в сайт автоматически, чтобы не исказить исходные технические данные. На изображении слева показана именно соответствующая страница каталога РИПК 2026.</div>
-</div>
+<div class="tech-panel" id="techPanel"></div>
 <div class="detail-actions">
 <a id="requestBtn" class="btn orange">Запросить цену</a>
 <a id="pdfBtn" class="btn white" target="_blank">Открыть страницу PDF</a>
@@ -78,6 +68,8 @@ const products=[{"page": 2, "cat": "Стропы", "name": "Универсаль
 ["Цепи","Короткозвенные и приводные цепи","17, 35",17],
 ["Канаты","Стальные канаты и техническая информация","36",36]
 ];
+const TECH={"Универсальный строп канатный петлевой (СКП) УСК1":{cols:["Грузоподъёмность, т","Канат D, мм","ГОСТ","Мин. длина, м","Петля, мм"],rows:[["0,32","6,2","2688-80","0,5","240"],["0,40","6,9","2688-80","0,5","240"],["0,50","7,6","2688-80","0,5","240"],["0,63","8,3","2688-80","0,5","240"]]},"Одноветьевой строп канатный (1СК)":{cols:["Грузоподъёмность, т","Канат D, мм","ГОСТ","Крюк","Зев, мм","Длина, м","Коуш, мм","Петля, мм"],rows:[["0,50","7,6","2688-80","320A","21,0","0,5","30","240"],["0,63","8,3","2688-80","320A","21,0","0,5","30","240"],["0,80","9,6","2688-80","320A","24,0","0,5","30","240"]]},"Четырехветьевой строп канатный (4СК)":{cols:["Грузоподъёмность, т","Канат D, мм","ГОСТ","Крюк","Зев, мм","Коуш, мм","Звено"],rows:[["1,25","7,6","2688-80","320A","21,0","30","РТ"],["1,60","8,3","2688-80","320A","21,0","30","РТ"],["2,00","9,6","2688-80","320A","24,0","—","—"]]},"Крюк 320А":{cols:["Грузоподъёмность, т","A, мм","B, мм","C, мм","Масса, кг"],rows:[["0,75","21","16","70","0,16"],["1,00","24","18","80","0,25"],["1,60","25","23","91","0,35"],["2,50","27","20","104","0,50"],["5,00","33","38","144","0,77"]]},"Крюк SLR 116 с широким зевом":{cols:["Грузоподъёмность, т","A, мм","B, мм","C, мм","Масса, кг"],rows:[["1,12","49","20,5","103","0,38"],["2,00","62","24,0","121","0,72"],["3,50","73","31,5","153","1,25"],["9,00","84","44,0","184","2,32"],["18,0","105","49,0","216","—"]]}};
+function techHtml(name){const t=TECH[name];if(!t)return '<div class="tech-source">Для этой позиции таблица характеристик пока не перенесена в текстовый вид. Используйте исходную техническую страницу каталога — она показана рядом.</div>';return '<div class="tech-title">Технические характеристики</div><div class="table-wrap"><table class="data-table"><thead><tr>'+t.cols.map(c=>'<th>'+c+'</th>').join('')+'</tr></thead><tbody>'+t.rows.map(r=>'<tr>'+r.map(x=>'<td>'+x+'</td>').join('')+'</tr>').join('')+'</tbody></table></div><div class="tech-source">Данные перенесены из таблицы на соответствующей странице каталога РИПК 2026. Для остальных параметров используйте исходную техническую страницу.</div>}
 function renderCats(){document.getElementById('catgrid').innerHTML=cats.map(c=>`<article class="cat" onclick="chooseCat('${c[0]}')"><img src="assets/page-${String(c[3]).padStart(2,'0')}.jpg"><h3>${c[0]}</h3><p>${c[1]}</p><span>${c[2]} • открыть изделия →</span></article>`).join('');document.getElementById('catSelect').innerHTML='<option value="Все">Все категории</option>'+cats.map(c=>`<option>${c[0]}</option>`).join('')}
 function chooseCat(c){document.getElementById('catSelect').value=c;document.getElementById('products').scrollIntoView({behavior:'smooth'});renderProducts()}
 function renderProducts(){const q=document.getElementById('q').value.trim().toLowerCase();const c=document.getElementById('catSelect').value;const list=products.filter(p=>(c==='Все'||p.cat===c)&&(!q||p.name.toLowerCase().includes(q)));document.getElementById('count').textContent=`Показано ${list.length} изделий из ${products.length}`;document.getElementById('productsGrid').innerHTML=list.map(p=>`<article class="product" onclick="openPage(${p.page},'${p.name.replace(/'/g,"\\'")}','${p.cat}')"><img src="assets/page-${String(p.page).padStart(2,'0')}.jpg"><div class="pb"><div class="tag">${p.cat}</div><h3>${p.name}</h3><p>Источник: каталог РИПК 2026 • стр. ${p.page}</p><div class="open">Открыть карточку изделия →</div></div></article>`).join('')||'<p style="color:#6e7f8e">Ничего не найдено. Попробуйте другое название или категорию.</p>'}
@@ -88,7 +80,7 @@ document.getElementById('mdcat').textContent=cat;
 document.getElementById('mpage').textContent='№ '+n;
 document.getElementById('tname').textContent=name;
 document.getElementById('tcat').textContent=cat;
-document.getElementById('tpage').textContent='№ '+n+' каталога 2026';
+document.getElementById('tpage').textContent='№ '+n+' каталога 2026'; document.getElementById('techPanel').innerHTML=techHtml(name);
 document.getElementById('requestBtn').href='mailto:oooripk@yandex.ru?subject='+encodeURIComponent('Запрос цены: '+name);
 document.getElementById('pdfBtn').href='catalog-2026.pdf#page='+n;
 document.getElementById('modal').classList.add('show');
